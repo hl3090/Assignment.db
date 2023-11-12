@@ -1,0 +1,834 @@
+            
+                                                              (Database)
+ 
+ 1. What do you understand By Database...
+ Ans. A database is a system or method for organizing, storing, and retrieving large amounts of data. The main objective of using a database is to improve data 
+     efficiency and reliability.
+ A database is typically designed to handle complex relationships between different pieces of data, ensuring that data integrity is maintained and duplication is 
+ avoided. This allows businesses and individuals to store, manage, and analyze large amounts of data in a structured and efficient manner.
+
+
+ 2. What is Normalization? 
+ Ans. Normalization is a technique used in relational database design to minimize redundancy and improve data integrity. It involves decomposing tables to eliminate
+     functional dependencies between non-key attributes. This ensures that each table in the database has a well-defined purpose.
+
+
+ 3. What is Difference between DBMS and RDBMS? 
+ Ans.        DBMS                                               RDBMS
+    1. DBMS stores data as file.                     1.RDBMS stores data in tabular form.
+
+    2. Data elements need to access individually.    2. Multiple data elements can be accessed at the same time.
+
+    3. No relationship between data.                 3. Data is stored in the form of tables which are related to
+                                                        each other.
+
+    4. Normalization is not present.                 4. Normalization is present.
+
+    5. DBMS does not support distributed database.   5. RDBMS supports distributed database.
+
+
+
+ 4. What is MF Cod Rule of RDBMS Systems? 
+ Ans. The MF (Multi-Field) Cod Rule of RDBMS systems is a fundamental rule in data management and database design. This rule is designed to prevent data redundancy
+      and ensure data integrity in RDBMS systems.
+   According to the MF Cod Rule, the attributes (or columns) of a relation must form a candidate key, or at least ensure that no two distinct tuples (or rows) of the
+   relation have the same set of attribute values.
+
+
+
+ 5. What do you understand By Data Redundancy? 
+ Ans. Data Redundancy is a technique used in databases to maintain a backup of the data in a different location. This ensures that the data remains safe and secure 
+      even if the primary data is accidentally lost, deleted, or corrupted.
+     
+    
+
+ 6. What is DDL Interpreter?
+ Ans. DDL Interpreter, or Data Definition Language Interpreter, is a tool used to execute and process Data Definition Language (DDL) commands. These commands define
+     the structure and constraints of a database, such as creating, modifying, or deleting tables, views, or stored procedures.
+
+
+ 
+ 7. What is DML Compiler in SQL?
+ Ans. DML is short name of Data Manipulation Language which deals with data manipulation, and includes most common SQL statements such SELECT, INSERT, UPDATE, DELETE
+     etc, and it is used to store, modify, retrieve, delete and update data in database.
+
+
+ 
+ 8. What is SQL Key Constraints writing an Example of SQL Key Constraints
+ Ans. SQL Key Constraints are used to define the relationships between the different tables in a database. There are three types of key constraints: PRIMARY KEY, 
+     FOREIGN KEY, and UNIQUE KEY.
+   
+ 1.PRIMARY KEY: This is a column or a set of columns used to identify a row uniquely in a table. The PRIMARY KEY constraint is used to define the primary key of a table.
+
+ 2.FOREIGN KEY: A FOREIGN KEY is a column or a set of columns used to refer to the PRIMARY KEY of another table. The FOREIGN KEY constraint is used to define the foreign
+               key of a table.
+
+ 3.UNIQUE KEY: The UNIQUE KEY constraint ensures that all values in a column are different. This means that two or more rows cannot have the same values in the UNIQUE 
+               KEY column.
+
+  
+   Here is an example of SQL UNIQUE KEY Constraints:
+
+                CREATE TABLE Persons (
+           
+                 ID INT NOT NULL,
+                 FirstName varchar(255) NOT NULL,
+                 LastName varchar(255),
+                 Age int,
+                 PRIMARY KEY (ID),
+                 UNIQUE (LastName, FirstName)
+             );
+
+
+
+ 9. What is save Point? How to create a save Point write a Query?
+ Ans. A savepoint is a point within a transaction that allows you to revert or rollback the transaction to that point without rolling back the entire transaction.
+     You can create a savepoint in SQL by using the SAVEPOINT command followed by a savepoint name.
+
+   For example, let's say you want to insert two new rows into a table, but you only want to commit one of the rows to the database. Here's how you could do it:
+
+      1.Begin a transaction by executing the BEGIN command.
+    
+      2.Insert the first row and commit it to the database by executing the COMMIT command.
+
+      3.Create a savepoint by executing the SAVEPOINT command followed by a savepoint name. For example, SAVEPOINT svp1.
+
+      4.Insert the second row into the table.
+
+      5.If you want to rollback the second row, you can do so by executing the ROLLBACK TO SAVEPOINT command followed by the savepoint name. For example, ROLLBACK
+        TO SAVEPOINT svp1. This will rollback the transaction to the savepoint you created earlier, effectively undoing the second insert statement.   
+
+      6.Finally, you can either commit the transaction by executing the COMMIT command, or rollback the entire transaction by executing the ROLLBACK command.
+
+
+
+
+ 10.What is trigger and how to create a Trigger in SQL?
+ Ans. A trigger is a special type of stored procedure that automatically executes (or triggers) when a particular event happens to a table or a view. This can be used
+     to maintain data integrity and ensure that certain actions always occur when specific changes are made to the database.
+
+    Here's a basic example of how to create a trigger in SQL:
+
+         CREATE TRIGGER trg_example
+                    
+                AFTER INSERT
+                ON table_name
+                FOR EACH ROW
+                BEGIN
+   
+                -- Your SQL statement or statements go here.
+                - For example:
+                -- INSERT INTO other_table (column1, column2) VALUES (NEW.column1, NEW.column2);
+ 
+                END;
+
+  In this example, trg_example is the name of the trigger. The trigger will automatically execute AFTER INSERT on the table_name. FOR EACH ROW specifies that the 
+  trigger will fire for each row inserted.
+
+  Inside the trigger, you can write your own SQL statements that will be executed when the trigger is fired. For example, you can use the NEW keyword to refer to the 
+  new row being inserted into the table.
+
+
+
+
+                                         SQL Queries
+  1. Create Table Name : Student and Exam..
+
+        CREATE TABLE student
+
+       (
+         Rollno int PRIMARY KEY AUTO_INCREMENT,
+         Name varchar(40),
+         Branch varchar(40) );
+
+
+
+      INSERT INTO student (Rollno,Name,Branch) VALUES ("Jay","Computer Science");
+      INSERT INTO student (Rollno,Name,Branch) VALUES ("Suhani","Electronic and Com.");
+      INSERT INTO student (Rollno,Name,Branch) VALUES ("Kriti","Electronic and Com.");
+
+
+
+      CREATE TABLE Exam 
+      (
+        S_code varchar(20),
+        Marks int,
+
+        P_code varchar(40),
+
+        Rollno fk int,
+        FOREIGN KEY (Rollno_fk) REFERENCES Student (Rollno)
+
+       )
+
+
+       INSERT INTO Exam (S_code,Marks,P_code,Rollno_fk) VALUES ('CS11','50','CS','1');
+       INSERT INTO Exam (S_code,Marks,P_code,Rollno_fk) VALUES ('CS12','60','CS','1');
+       INSERT INTO Exam (S_code,Marks,P_code,Rollno_fk) VALUES ('EC101','66','EC','2');
+       INSERT INTO Exam (S_code,Marks,P_code,Rollno_fk) VALUES ('EC102','70','EC','2');
+       INSERT INTO Exam (S_code,Marks,P_code,Rollno_fk) VALUES ('EC101','45','EC','3');
+       INSERT INTO Exam (S_code,Marks,P_code,Rollno_fk) VALUES ('EC102','50','EC','3');
+
+
+
+  2. Create table given below: Employee and Incentive Table...
+
+
+     CREATE TABLE employee
+     (
+       employee_id int PRIMARY KEY AUTO_INCREMENT,
+       First_name varchar(50),
+       Last_name varchar(50),
+       Salary int,
+       Joining_date varchar(40),
+       Department varchar(40)
+     )
+
+ 
+     INSERT INTO employee (employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES ('John','Abraham','100000','01-JAN-2023','Banking');
+     INSERT INTO employee (employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES ('Michael','Clark','80000','01-JAN-2023','Insurance');
+     INSERT INTO employee (employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES ('Roy','Thomas','70000','01-JAN-2023','Banking');
+     INSERT INTO employee (employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES ('Tom','Jose','60000','01-FEB-2023','Insurance');
+     INSERT INTO employee (employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES ('Jerry','Pinto','60000','01-FEB-2023','Insurance');
+     INSERT INTO employee (employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES ('Philip','Mathew','75000','01-MAR-2023','Services');
+     INSERT INTO employee (employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES ('Testname1','123','50000','01-JAN-2023','Insurance');
+
+
+
+
+
+    CREATE TABLE Incentive
+    (
+      employee_id_fk int,
+      FORIEGN KEY (employee_id)REFERENCES employee(employee_id)
+
+      incentive_date varchar(50),
+      incentive_amount int  )
+
+
+
+    INSERT INTO Incentive (employee_id_fk,incentive_date,incentive_amount) VALUES ('01','01-FEB-2023','5000');
+    INSERT INTO Incentive (employee_id_fk,incentive_date,incentive_amount) VALUES ('02','01-FEB-2023','4000');
+    INSERT INTO Incentive (employee_id_fk,incentive_date,incentive_amount) VALUES ('03','01-MAR-2023','3000');
+    INSERT INTO Incentive (employee_id_fk,incentive_date,incentive_amount) VALUES ('04','01-MAR-2023','3000');
+    INSERT INTO Incentive (employee_id_fk,incentive_date,incentive_amount) VALUES ('05','01-APR-2023','2500');
+    INSERT INTO Incentive (employee_id_fk,incentive_date,incentive_amount) VALUES ('06','01-APR-2023','2500');
+    INSERT INTO Incentive (employee_id_fk,incentive_date,incentive_amount) VALUES ('07','04-APR-2023','2000');
+
+
+
+  3. Get First_Name from employee table using Tom name “Employee Name”.
+  Ans. SELECT * FROM employee WHERE First_name LIKE 'Tom'
+
+
+  4. Get FIRST_NAME, Joining Date, and Salary from employee table.
+  Ans. SELECT First_name,Joining_date,Salary FROM employee
+
+
+  5. Get all employee details from the employee table order by First_Name Ascending and Salary descending?
+  Ans. SELECT * FROM employee ORDER BY First_name ASC
+       SELECT * FROM employee ORDER BY Salary DESC
+
+
+  6. Get employee details from employee table whose first name contains ‘J’.
+  Ans. SELECT * FROM employee WHERE First_name LIKE 'J%'
+
+
+  7. Get department wise maximum salary from employee table order by salaryascending?
+  Ans. SELECT * FROM employee ORDER BY Salary ASC
+
+
+  
+  9. Select first_name, incentive amount from employee and incentives table forthose employees who have incentives and incentive amount greater than 3000
+  Ans. SELECT * FROM incentive WHERE incentive amount>3000
+ 
+
+
+  10. Create After Insert trigger on Employee table which insert records in viewtable..
+  Ans. DELIMETER $$
+
+       CREATE TRIGGER insert_trigger AFTER INSERT ON Employee FOR EACH ROW
+
+       BEGIN
+
+       INSERT INTO test(First_name,Last_name,Salary,Joining_date,Department) VALUES (new.First_name,new.Last_name,new.Salary,new.Joining_date,new.Department,"RECORD 
+       INSERTED!");
+
+       END
+
+
+
+
+  11.Create table given below: Salesperson and Customer
+  Ans. 
+       CREATE TABLE Salesperson
+       (
+        Sno int PRIMARY KEY AUTO_INCREMENT,
+        Sname varchar(50),
+        City varchar(40),
+        Comm varchar(40)
+       )
+  
+
+       INSERT INTO Salesperson (Sno,Sname,City,Comm) VALUES ('Peel','London','12');
+       INSERT INTO Salesperson (Sno,Sname,City,Comm) VALUES ('Serres','San Jones','13');
+       INSERT INTO Salesperson (Sno,Sname,City,Comm) VALUES ('Motika','London','14');
+       INSERT INTO Salesperson (Sno,Sname,City,Comm) VALUES ('Rafkin','Barcelona','15');
+       INSERT INTO Salesperson (Sno,Sname,City,Comm) VALUES ('Axelord','New York','16');
+
+
+
+       CREATE TABLE Customer
+       (
+        Cnm int PRIMARY KEY AUTO_INCREMENT,
+        Cname varchar(50),
+        City varchar(50),
+        Rating int,
+
+
+        Sno_fk int,
+        FOREIGN KEY (Sno_fk)REFERENCES Salesperson(Sno)
+       )
+ 
+
+      INSERT INTO Customer (Cnm,Cname,City,Rating,Sno_fk) VALUES ('Hoffman','London','100','1');
+      INSERT INTO Customer (Cnm,Cname,City,Rating,Sno_fk) VALUES ('Govanne','Roe','200','2');
+      INSERT INTO Customer (Cnm,Cname,City,Rating,Sno_fk) VALUES ('Liu','San Jose','300','3');
+      INSERT INTO Customer (Cnm,Cname,City,Rating,Sno_fk) VALUES ('Grass','Barcelona','100','4');
+      INSERT INTO Customer (Cnm,Cname,City,Rating,Sno_fk) VALUES ('Clemens','London','300','5');
+      INSERT INTO Customer (Cnm,Cname,City,Rating,Sno_fk) VALUES ('Pereira','Roe','100','6');
+
+
+      
+  14.Names and cities of all salespeople in London with commission above 0.12
+  Ans. 
+      SELECT City="London" FROM Salesperson WHERE Comm>=12 
+
+
+
+  15.All salespeople either in Barcelona or in London..
+  Ans. 
+     SELECT City="Barcelona" OR City="London" FROM Salesperson
+ 
+
+   
+  16.All salespeople with commission between 0.10 and 0.12. (Boundary values should be excluded).
+  Ans. 
+      SELECT * FROM Salesperson WHERE Comm BETWEEN 0.10 AND 0.12
+
+
+
+
+  17.All customers excluding those with rating <= 100 unless they are located in Rome..
+  Ans.
+      SELECT City="Roe" FROM Customer WHERE Rating <= 100
+  
+
+
+
+  
+
+  18. Write a SQL statement that displays all the information about all salespeople..
+  Ans.
+        SELECT * FROM Salespeople;
+
+
+  
+
+  19. From the following table, write a SQL query to find orders that are delivered by a salesperson with ID. 5001. Return ord_no, ord_date, purch_amt.
+  Ans.
+       SELECT orders.ord_no, orders.ord_date, orders.purch_amt
+       FROM orders
+       INNER JOIN salespeople ON orders.salesperson_id = salespeople.id
+       WHERE salespeople.id = 5001;
+  
+
+   
+
+  20. From the following table, write a SQL query to select a range of products whose price is in the range Rs.200 to Rs.600. Begin and end values are included.
+      Return pro_id, pro_name, pro_price, and pro_com.
+  Ans. 
+       SELECT pro_id, pro_name, pro_price, pro_com
+       FROM products
+       WHERE pro_price BETWEEN 200 AND 600;
+
+
+
+  21. From the following table, write a SQL query to calculate the average price for a manufacturer code of 16. Return avg.
+  Ans. 
+       SELECT AVG(price) as avg
+       FROM products
+       WHERE manufacturer_code = 16;
+
+
+
+  22. From the following table, write a SQL query to display the pro_name as 'Item Name' and pro_priceas 'Price in Rs.'
+  Ans.
+      SELECT 
+      pro_name AS 'Item Name', 
+      pro_price AS 'Price in Rs.' 
+      FROM 
+       Products;
+
+
+  
+  23. From the following table, write a SQL query to find the items whose prices are higher than or equal to $250. Order the 
+      result by product price in descending, then product name in ascending. Return pro_name and pro_price.
+  Ans. 
+      SELECT pro_name, pro_price
+      FROM products
+      WHERE pro_price >= 250
+      ORDER BY pro_price DESC, pro_name ASC;
+
+
+
+
+  24. From the following table, write a SQL query to calculate average price of the items for each company. Return average price and company code.
+  Ans. 
+      SELECT CompanyCode, AVG(Price) as AveragePrice
+      FROM ItemsTable
+      GROUP BY CompanyCode;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+     
